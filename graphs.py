@@ -31,10 +31,34 @@ def myLen(lst):
 
 # Check whether two given nodes, n1 and n2, in g, are neighbors.
 def isNeighbor(g,n1,n2):
-    raise UnimplementedExeception
+	g = [n1, n2] #defining an edge
+	if (g[(n1,n2)] == n1 or g[(n2,n1)] == n2): 
+	#if there is an edge between 2 
+	#we can tell if there is an edge if it equals one of the nodes
+		return True
+	def addIfNotInList(lst,e):
+	    if (not (contains(lst, e))) :
+	    	return [e] + lst
+	    else: 
+	    	return lst
+
+	# edges is the list of edges
+	# Walk over this list of edges to build up a set of neighbors
+	def getNeighborsHelper(edges, g, n):
+	    if (edges == []): 
+	    	return [] # No more edges, return nothing
+	    else:
+	         # Check to see if the first edge is connected to n
+	         # I.e., either edges[0][0] == n or edges[0][1] == n
+	         # If it is, build up a new list including it and recurse
+	         # But--critically--do not add it if it is already in the list
+	         if (edges[0][0] == n):
+	             ...
+	         else:
+	             ...
 
 def getNeighbors(g, n):
-    raise UnimplementedExeception
+	return getNeighborsHelper(g[1], n)
 
 # -------------------------------------------------------------------
 # Graph Color Checking
@@ -52,6 +76,7 @@ def looksLikeColorAssignment(colorAsn):
 def looksLikeColoring(coloring):
     forall(coloring, looksLikeColorAssignment)
 
+    return
 # 
 # Tasks 3, 4, and 5
 # 
@@ -60,19 +85,34 @@ def looksLikeColoring(coloring):
 # Return the number of colors used for a given coloring
 # Add a precondition here if you think it's necessary
 def numColors(coloring):
-    raise UnimplementedExeception
+	# precondtions
+		# must be either red blue green or black
+		# must be looking at nodes in the same graph
+	#precondition(coloring[()("red" or "blue" or "green" or "black")] == True and isNeighbor ) 
+
+
+
+    #red, blue, green, black
+    # coloring[(count number)(color name), ...]
+    emptylst = [] # to keep track of all nodes
 
 # Task 4
 # Check whether a given coloring is consistent for a graph, `g`
 # Add a precondition / postcondition here if you think it's necssary
 def isConsistent(g, coloring):
+	# if num colors doesn't run (because one of the preconditions is that it has to meet one
+	# of the node colors available, then isConsistent == False)
+
     raise UnimplementedExeception
 
 # Task 5
 # Get the color of an individual node `n`
 # precondition(for all coloring, n: len(coloring) >= 1 and looksLikeColoring(coloring))
 def getColor(coloring, n):
-    raise UnimplementedExeception
+	precondition((len(coloring) >= 1) and looksLikeColoring(coloring) == True) 
+	return g[(n,coloring)] #return the color and number of specific x,y given
+
+    # raise UnimplementedExeception
 
 # -------------------------------------------------------------------
 # END OF P3 / BEGIN P4
