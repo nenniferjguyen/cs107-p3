@@ -85,16 +85,16 @@ def looksLikeColoring(coloring):
 # Return the number of colors used for a given coloring
 # Add a precondition here if you think it's necessary
 def numColors(coloring):
+
 	# precondtions
 		# must be either red blue green or black
 		# must be looking at nodes in the same graph
-	#precondition(coloring[()("red" or "blue" or "green" or "black")] == True and isNeighbor ) 
-
-
+	precondition(coloring[()("red" or "blue" or "green" or "black")] == True and isNeighbor == True ) 
 
     #red, blue, green, black
     # coloring[(count number)(color name), ...]
     emptylst = [] # to keep track of all nodes
+
 
 # Task 4
 # Check whether a given coloring is consistent for a graph, `g`
@@ -103,14 +103,14 @@ def isConsistent(g, coloring):
 	# if num colors doesn't run (because one of the preconditions is that it has to meet one
 	# of the node colors available, then isConsistent == False)
 
-    raise UnimplementedExeception
+    raise UnimplementedExeception 
 
 # Task 5
 # Get the color of an individual node `n`
 # precondition(for all coloring, n: len(coloring) >= 1 and looksLikeColoring(coloring))
 def getColor(coloring, n):
 	precondition((len(coloring) >= 1) and looksLikeColoring(coloring) == True) 
-	return g[(n,coloring)] #return the color and number of specific x,y given
+	return g[(coloring, n)] #return the color and number of specific x,y given
 
     # raise UnimplementedExeception
 
