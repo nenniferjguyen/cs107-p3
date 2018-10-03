@@ -208,3 +208,4 @@ def calculateBipartite(graph):
     A = answer[0]
     B = answer[1]
     return isEmpty(setIntersection(A,B))
+    
