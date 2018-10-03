@@ -149,18 +149,18 @@ def noRepeats(lst):
 # Take the union of two lists, regarded as sets
 def setUnion(lst1, lst2):
     if (isEmpty(lst1)): return lst2
-    elif (member(head(lst1), lst2)):
+    elif (member(lst2, head(lst1))):
         return setUnion(tail(lst1), lst2)
     else:
         return [head(lst1)] + setUnion(tail(lst1), lst2)
 
 # Calculate the intersection of two sets, lst1 and lst2
 def setIntersection(lst1, lst2):
-    if (isEmpty(lst1)): return lst2
-    elif (member(head(lst1), lst2)):
-        return [head(lst1)] + setUnion(tail(lst1), lst2)
+    if (isEmpty(lst1)): return []
+    elif (member(lst2, head(lst1))):
+        return [head(lst1)] + setIntersection(tail(lst1), lst2)
     else:
-        return setUnion(tail(lst1), lst2)
+        return setIntersection(tail(lst1), lst2)
 
 # Task 7
 # Calculate whether or not two sets, `lst1` and `lst2`, are equal or
@@ -187,12 +187,12 @@ def calculateNextSet(g,A,B):
 # exploration is possible: at each step of the way, find A's neighbors
 # and add them to B (using `calculateNextSet`), and then swap B with A
 # to continue the exploration
-def iterateFrontier(A,B):
-    if (setEquals(calculateNextSet(A,B), B)):
+def iterateFrontier(g,A,B):
+    if (setEquals(calculateNextSet(g,A,B), B)):
         # Done, no work to be done
         return (A,B)
     else:
-        return iterateFrontier(calculateNextSet(A,B), A)
+        return iterateFrontier(g,calculateNextSet(g,A,B), A)
 
 # Pick an artbirary node in the graph to put in set `A`, and leave set
 # `B` empty
@@ -203,7 +203,8 @@ def start(graph):
 # defined so far
 def calculateBipartite(graph):
     # Calculate the final sets A and B as a pair
-    answer = iterateFrontier(start(graph))
+    if(len(graph[0]) == 0): return True
+    answer = iterateFrontier(graph,[graph[0][0]],[])
     A = answer[0]
     B = answer[1]
     return isEmpty(setIntersection(A,B))
